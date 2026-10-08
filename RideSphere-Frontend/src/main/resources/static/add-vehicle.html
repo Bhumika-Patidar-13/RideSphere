@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Add Vehicle - RideSphere</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Times New Roman", serif;
+            background: #2b211b;
+            color: #f1e8dc;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        nav {
+            height: 70px;
+            background: #f1e8dc;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #3b2a20;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #3b2a20;
+            font-size: 18px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main */
+        .container {
+            width: 500px;
+            margin: 60px auto;
+            background: #3a2b22;
+            padding: 35px;
+            border: 1px solid #6b5141;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 30px;
+            color: #f1e8dc;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #8a6d5a;
+            background: #f1e8dc;
+            color: #2b211b;
+            font-family: "Times New Roman", serif;
+            font-size: 16px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border: 2px solid #c8ad98;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 10px;
+            background: #f1e8dc;
+            color: #2b211b;
+            border: none;
+            font-family: "Times New Roman", serif;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #d8c4b3;
+        }
+
+        .back-btn {
+            margin-top: 15px;
+            background: transparent;
+            color: #f1e8dc;
+            border: 1px solid #8a6d5a;
+        }
+
+        .back-btn:hover {
+            background: #4a362a;
+            color: #f1e8dc;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 17px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">🚗 RideSphere Admin</div>
+
+        <div class="nav-links">
+            <a href="admin-dashboard.html">Dashboard</a>
+            <a href="#" onclick="logout()">Logout</a>
+        </div>
+    </nav>
+
+
+    <div class="container">
+
+        <h1 id="pageTitle">Add Vehicle</h1>
+
+        <form id="vehicleForm">
+
+            <div class="form-group">
+                <label for="vehiclename">Vehicle Name</label>
+                <input
+                    type="text"
+                    id="vehiclename"
+                    placeholder="Enter vehicle name"
+                    required>
+            </div>
+
+
+            <div class="form-group">
+                <label for="model">Model</label>
+                <input
+                    type="text"
+                    id="model"
+                    placeholder="Enter vehicle model"
+                    required>
+            </div>
+
+
+            <div class="form-group">
+                <label for="type">Vehicle Type</label>
+
+                <select id="type" required>
+                    <option value="">Select Type</option>
+                    <option value="Car">Car</option>
+                    <option value="Bike">Bike</option>
+                    <option value="Scooter">Scooter</option>
+                    <option value="SUV">SUV</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="dailyfee">Daily Fee</label>
+                <input
+                    type="number"
+                    id="dailyfee"
+                    placeholder="Enter daily rental fee"
+                    min="100"
+                    required>
+            </div>
+
+
+            <button type="submit" id="submitButton">
+                Add Vehicle
+            </button>
+
+        </form>
+
+        <button class="back-btn" onclick="goBack()">
+            Back to Dashboard
+        </button>
+
+        <div id="message"></div>
+
+    </div>
+
+
+<script>
+
+    // Check admin login
+    const admin = localStorage.getItem("admin");
+
+    if (!admin) {
+        window.location.href = "admin-login.html";
+    }
+
+
+    // Check whether this page is being used for EDIT
+    const editVehicleId = localStorage.getItem("editVehicleId");
+
+
+    if (editVehicleId) {
+
+        document.getElementById("pageTitle").innerText = "Edit Vehicle";
+        document.getElementById("submitButton").innerText = "Update Vehicle";
+
+        loadVehicle(editVehicleId);
+    }
+
+
+    // Load vehicle data for editing
+    async function loadVehicle(id) {
+
+        try {
+
+            const response = await fetch(
+                "http://localhost:8082/vehicles/" + id
+            );
+
+            if (!response.ok) {
+
+                alert("Vehicle not found.");
+
+                localStorage.removeItem("editVehicleId");
+
+                window.location.href = "admin-dashboard.html";
+
+                return;
+            }
+
+
+            const vehicle = await response.json();
+
+
+            document.getElementById("vehiclename").value =
+                vehicle.vehiclename;
+
+            document.getElementById("model").value =
+                vehicle.model;
+
+            document.getElementById("type").value =
+                vehicle.type;
+
+            document.getElementById("dailyfee").value =
+                vehicle.dailyfee;
+
+        }
+        catch (error) {
+
+            console.error("Load Vehicle Error:", error);
+
+            alert("Unable to load vehicle.");
+
+        }
+    }
+
+
+    // Add / Update vehicle
+    document.getElementById("vehicleForm")
+        .addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+
+            const vehicle = {
+
+                vehiclename:
+                    document.getElementById("vehiclename").value,
+
+                model:
+                    document.getElementById("model").value,
+
+                type:
+                    document.getElementById("type").value,
+
+                dailyfee:
+                    Number(document.getElementById("dailyfee").value)
+
+            };
+
+
+            try {
+
+                let response;
+
+
+                // EDIT
+                if (editVehicleId) {
+
+                    response = await fetch(
+                        "http://localhost:8082/vehicles/"
+                        + editVehicleId,
+                        {
+                            method: "PUT",
+
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+
+                            body: JSON.stringify(vehicle)
+                        }
+                    );
+
+                }
+
+                // ADD
+                else {
+
+                    response = await fetch(
+                        "http://localhost:8082/vehicles",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+
+                            body: JSON.stringify(vehicle)
+                        }
+                    );
+
+                }
+
+
+                if (response.ok) {
+
+                    document.getElementById("message").innerText =
+                        editVehicleId
+                            ? "Vehicle updated successfully!"
+                            : "Vehicle added successfully!";
+
+
+                    document.getElementById("vehicleForm").reset();
+
+
+                    // Remove edit mode
+                    localStorage.removeItem("editVehicleId");
+
+
+                    setTimeout(function() {
+
+                        window.location.href =
+                            "admin-dashboard.html";
+
+                    }, 1000);
+
+                }
+                else {
+
+                    document.getElementById("message").innerText =
+                        "Unable to save vehicle.";
+
+                }
+
+            }
+            catch (error) {
+
+                console.error("Vehicle Error:", error);
+
+                document.getElementById("message").innerText =
+                    "Unable to connect to Vehicle Service.";
+
+            }
+
+        });
+
+
+    function goBack() {
+
+        localStorage.removeItem("editVehicleId");
+
+        window.location.href = "admin-dashboard.html";
+
+    }
+
+
+    function logout() {
+
+        localStorage.removeItem("admin");
+
+        localStorage.removeItem("editVehicleId");
+
+        window.location.href = "admin-login.html";
+
+    }
+
+</script>
+
+</body>
+</html>

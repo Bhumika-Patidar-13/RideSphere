@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Feedback | RideSphere</title>
+
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: "Times New Roman", serif;
+        background: #1f1712;
+        color: #f1e8dc;
+        min-height: 100vh;
+    }
+
+    /* NAVBAR */
+
+    .navbar {
+        height: 70px;
+        background: #2d211a;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 45px;
+        border-bottom: 1px solid #5c4636;
+    }
+
+    .logo {
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 28px;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: #e5d6c5;
+        font-size: 17px;
+    }
+
+    .nav-links a:hover {
+        color: white;
+    }
+
+    /* MAIN */
+
+    .feedback-container {
+        min-height: calc(100vh - 70px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
+    }
+
+    .feedback-card {
+        width: 500px;
+        background: #2d211a;
+        border: 1px solid #5c4636;
+        padding: 35px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .title {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .title h1 {
+        font-size: 30px;
+        margin-bottom: 8px;
+    }
+
+    .title p {
+        color: #bfae9c;
+        font-size: 16px;
+    }
+
+    /* FORM */
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 7px;
+        color: #d9c7b5;
+        font-size: 16px;
+    }
+
+    input,
+    textarea,
+    select {
+        width: 100%;
+        padding: 12px;
+        background: #211813;
+        color: #f1e8dc;
+        border: 1px solid #5c4636;
+        font-family: "Times New Roman", serif;
+        font-size: 16px;
+        outline: none;
+    }
+
+    textarea {
+        height: 120px;
+        resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+        border-color: #8b6b52;
+    }
+
+    /* BUTTONS */
+
+    .buttons {
+        display: flex;
+        gap: 12px;
+        margin-top: 25px;
+    }
+
+    button,
+    .back-btn {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        font-family: "Times New Roman", serif;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .submit-btn {
+        background: #6b4b37;
+        color: white;
+    }
+
+    .back-btn {
+        background: #4a3628;
+        color: #f1e8dc;
+    }
+
+    button:hover,
+    .back-btn:hover {
+        opacity: 0.85;
+    }
+
+    #message {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 16px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
+
+        .navbar {
+            padding: 0 20px;
+        }
+
+        .nav-links {
+            gap: 12px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+        }
+
+        .feedback-card {
+            width: 100%;
+        }
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="logo">
+        🚗 RideSphere
+    </div>
+
+    <div class="nav-links">
+
+        <a href="Home.html">Home</a>
+
+        <a href="vehicles.html">Vehicles</a>
+
+        <a href="mybooking.html">My Bookings</a>
+
+        <a href="profile.html">Profile</a>
+
+    </div>
+
+</div>
+
+
+<!-- FEEDBACK FORM -->
+
+<div class="feedback-container">
+
+    <div class="feedback-card">
+
+        <div class="title">
+
+            <h1>Feedback</h1>
+
+            <p>
+                Share your RideSphere experience with us.
+            </p>
+
+        </div>
+
+
+        <form id="feedbackForm">
+
+            <!-- BOOKING ID -->
+
+            <div class="form-group">
+
+                <label for="bookingid">
+                    Booking ID
+                </label>
+
+                <input
+                    type="number"
+                    id="bookingid"
+                    placeholder="Enter booking ID"
+                    required>
+
+            </div>
+
+
+            <!-- TRIP ID -->
+
+            <div class="form-group">
+
+                <label for="tripid">
+                    Trip ID
+                </label>
+
+                <input
+                    type="number"
+                    id="tripid"
+                    placeholder="Enter trip ID"
+                    required>
+
+            </div>
+
+
+            <!-- RATING -->
+
+            <div class="form-group">
+
+                <label for="ratingscore">
+                    Rating
+                </label>
+
+                <select id="ratingscore" required>
+
+                    <option value="">
+                        Select Rating
+                    </option>
+
+                    <option value="5">
+                        5 - Excellent
+                    </option>
+
+                    <option value="4">
+                        4 - Very Good
+                    </option>
+
+                    <option value="3">
+                        3 - Good
+                    </option>
+
+                    <option value="2">
+                        2 - Average
+                    </option>
+
+                    <option value="1">
+                        1 - Poor
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- COMMENTS -->
+
+            <div class="form-group">
+
+                <label for="comments">
+                    Your Feedback
+                </label>
+
+                <textarea
+                    id="comments"
+                    placeholder="Write your feedback here..."
+                    required></textarea>
+
+            </div>
+
+
+            <div class="buttons">
+
+                <a
+                    href="Home.html"
+                    class="back-btn">
+                    Back
+                </a>
+
+                <button
+                    type="submit"
+                    class="submit-btn">
+                    Submit Feedback
+                </button>
+
+            </div>
+
+        </form>
+
+
+        <div id="message"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* CHECK CUSTOMER LOGIN */
+
+    const customerData =
+        localStorage.getItem("customer");
+
+    if (!customerData) {
+
+        window.location.href = "login.html";
+
+    }
+
+
+    /* GET CUSTOMER */
+
+    const customer =
+        JSON.parse(customerData);
+
+
+    /* SUBMIT FEEDBACK */
+
+    document.getElementById("feedbackForm")
+        .addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+            const bookingid =
+                Number(
+                    document.getElementById("bookingid").value
+                );
+
+            const tripid =
+                Number(
+                    document.getElementById("tripid").value
+                );
+
+            const ratingscore =
+                Number(
+                    document.getElementById("ratingscore").value
+                );
+
+            const comments =
+                document.getElementById("comments").value;
+
+
+            const feedback = {
+
+                customerid: Number(customer.id),
+
+                tripid: tripid,
+
+                bookingid: bookingid,
+
+                ratingscore: ratingscore,
+
+                comments: comments,
+
+                feedbackdate:
+                    new Date()
+                        .toISOString()
+                        .split("T")[0]
+
+            };
+
+
+            console.log("Feedback:", feedback);
+
+
+            try {
+
+                const response = await fetch(
+                    "http://localhost:8087/feedbacks",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify(feedback)
+                    }
+                );
+
+
+                const result =
+                    await response.text();
+
+
+                console.log(
+                    "Feedback response:",
+                    result
+                );
+
+
+                if (response.ok) {
+
+                    document.getElementById("message")
+                        .textContent =
+                        "Feedback submitted successfully!";
+
+                    document.getElementById("message")
+                        .style.color =
+                        "#d8c3ad";
+
+                    document.getElementById("feedbackForm")
+                        .reset();
+
+                }
+                else {
+
+                    document.getElementById("message")
+                        .textContent =
+                        "Unable to submit feedback.";
+
+                    document.getElementById("message")
+                        .style.color =
+                        "#d98b7b";
+
+                    console.error(result);
+
+                }
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Feedback Error:",
+                    error
+                );
+
+                document.getElementById("message")
+                    .textContent =
+                    "Unable to connect to Feedback Service.";
+
+                document.getElementById("message")
+                    .style.color =
+                    "#d98b7b";
+
+            }
+
+        });
+
+</script>
+```
+
+</body>
+
+</html>

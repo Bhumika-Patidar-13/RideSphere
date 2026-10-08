@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Admin Dashboard - RideSphere</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Times New Roman", serif;
+            background: #2b211b;
+            color: #f1e8dc;
+            min-height: 100vh;
+        }
+
+
+        /* =========================
+           NAVBAR
+           ========================= */
+
+        nav {
+            height: 70px;
+            background: #f1e8dc;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #3b2a20;
+        }
+
+        .logout {
+            text-decoration: none;
+            color: #3b2a20;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .logout:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           MAIN
+           ========================= */
+
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 45px auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .welcome {
+            text-align: center;
+            color: #bfae9c;
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+
+
+        /* =========================
+           CARDS
+           ========================= */
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .dashboard-card {
+            background: #3a2b22;
+            border: 1px solid #6b5141;
+            padding: 30px 20px;
+            text-align: center;
+            min-height: 180px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dashboard-card h2 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .dashboard-card p {
+            color: #bfae9c;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-card button {
+            padding: 11px 22px;
+            background: #f1e8dc;
+            color: #2b211b;
+            border: none;
+
+            font-family: "Times New Roman", serif;
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .dashboard-card button:hover {
+            background: #d8c4b3;
+        }
+
+
+        /* =========================
+           DATA SECTIONS
+           ========================= */
+
+        .data-section {
+            margin-top: 50px;
+            background: #3a2b22;
+            border: 1px solid #6b5141;
+            padding: 25px;
+        }
+
+        .data-section h2 {
+            text-align: center;
+            font-size: 27px;
+            margin-bottom: 10px;
+        }
+
+        .section-description {
+            text-align: center;
+            color: #bfae9c;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+
+        /* =========================
+           TABLE
+           ========================= */
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        th {
+            background: #2b211b;
+            color: #f1e8dc;
+            padding: 13px;
+            border-bottom: 1px solid #6b5141;
+            font-size: 16px;
+        }
+
+        td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #554135;
+            color: #d6c5b5;
+            font-size: 15px;
+        }
+
+        tr:hover {
+            background: #34271f;
+        }
+
+
+        /* =========================
+           RATING
+           ========================= */
+
+        .rating {
+            color: #e2c58b;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           STATUS
+           ========================= */
+
+        .paid {
+            color: #9acb9a;
+            font-weight: bold;
+        }
+
+        .pending {
+            color: #d6b36a;
+            font-weight: bold;
+        }
+
+        .failed {
+            color: #d88989;
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           REFRESH BUTTON
+           ========================= */
+
+        .refresh-btn {
+            display: block;
+            margin: 0 auto 25px auto;
+
+            padding: 10px 22px;
+
+            background: #f1e8dc;
+            color: #2b211b;
+
+            border: none;
+
+            cursor: pointer;
+
+            font-family: "Times New Roman", serif;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .refresh-btn:hover {
+            background: #d8c4b3;
+        }
+
+
+        /* =========================
+           MESSAGE
+           ========================= */
+
+        .message {
+            text-align: center;
+            color: #bfae9c;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+
+
+        /* =========================
+           FOOTER
+           ========================= */
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            color: #8f7968;
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+           ========================= */
+
+        @media (max-width: 800px) {
+
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            nav {
+                padding: 0 20px;
+            }
+
+            .container {
+                width: 94%;
+            }
+        }
+
+
+        @media (max-width: 550px) {
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .data-section {
+                padding: 15px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+         ========================= -->
+
+    <nav>
+
+        <div class="logo">
+            🚗 RideSphere Admin
+        </div>
+
+        <a
+            class="logout"
+            href="#"
+            onclick="logout()">
+
+            Logout
+
+        </a>
+
+    </nav>
+
+
+
+    <!-- =========================
+         MAIN
+         ========================= -->
+
+    <div class="container">
+
+        <h1>
+            Admin Dashboard
+        </h1>
+
+        <p class="welcome">
+            Manage your RideSphere vehicle rental system
+        </p>
+
+
+
+        <!-- =========================
+             DASHBOARD CARDS
+             ========================= -->
+
+        <div class="dashboard-grid">
+
+
+            <!-- VEHICLES -->
+
+            <div class="dashboard-card">
+
+                <h2>
+                    🚗 Vehicles
+                </h2>
+
+                <p>
+                    Add, edit and manage vehicles.
+                </p>
+
+                <button
+                    onclick="openVehicles()">
+
+                    Manage Vehicles
+
+                </button>
+
+            </div>
+
+
+
+            <!-- DRIVERS -->
+
+            <div class="dashboard-card">
+
+                <h2>
+                    👨‍✈️ Drivers
+                </h2>
+
+                <p>
+                    Add, edit and manage drivers.
+                </p>
+
+                <button
+                    onclick="openDrivers()">
+
+                    Manage Drivers
+
+                </button>
+
+            </div>
+
+
+
+            <!-- TRIPS -->
+
+            <div class="dashboard-card">
+
+                <h2>
+                    🛣️ Trips
+                </h2>
+
+                <p>
+                    Create and manage trips.
+                </p>
+
+                <button
+                    onclick="openTrips()">
+
+                    Manage Trips
+
+                </button>
+
+            </div>
+
+
+
+            <!-- BOOKINGS -->
+
+            <div class="dashboard-card">
+
+                <h2>
+                    📋 Bookings
+                </h2>
+
+                <p>
+                    View all customer bookings.
+                </p>
+
+                <button
+                    onclick="showBookings()">
+
+                    View Bookings
+
+                </button>
+
+            </div>
+
+
+
+            <!-- PAYMENTS -->
+
+            <div class="dashboard-card">
+
+                <h2>
+                    💳 Payments
+                </h2>
+
+                <p>
+                    View all customer payments.
+                </p>
+
+                <button
+                    onclick="showPayments()">
+
+                    View Payments
+
+                </button>
+
+            </div>
+
+
+
+            <!-- FEEDBACK -->
+
+            <div class="dashboard-card">
+
+                <h2>
+                    ⭐ Feedback
+                </h2>
+
+                <p>
+                    View all customer feedback.
+                </p>
+
+                <button
+                    onclick="showFeedback()">
+
+                    View Feedback
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =====================================================
+             BOOKINGS
+             ===================================================== -->
+
+        <div
+            class="data-section"
+            id="bookingSection"
+            style="display:none;">
+
+            <h2>
+                📋 All Customer Bookings
+            </h2>
+
+            <p class="section-description">
+                All bookings received from customers
+            </p>
+
+            <button
+                class="refresh-btn"
+                onclick="loadBookings()">
+
+                Refresh Bookings
+
+            </button>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Booking ID
+                            </th>
+
+                            <th>
+                                Customer ID
+                            </th>
+
+                            <th>
+                                Vehicle ID
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Duration
+                            </th>
+
+                            <th>
+                                Driver Required
+                            </th>
+
+                            <th>
+                                Driver ID
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="bookingTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <div
+                id="bookingMessage"
+                class="message">
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             PAYMENTS
+             ===================================================== -->
+
+        <div
+            class="data-section"
+            id="paymentSection"
+            style="display:none;">
+
+            <h2>
+                💳 All Customer Payments
+            </h2>
+
+            <p class="section-description">
+                All payments made by customers
+            </p>
+
+            <button
+                class="refresh-btn"
+                onclick="loadPayments()">
+
+                Refresh Payments
+
+            </button>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Payment ID
+                            </th>
+
+                            <th>
+                                Customer ID
+                            </th>
+
+                            <th>
+                                Booking ID
+                            </th>
+
+                            <th>
+                                Amount
+                            </th>
+
+                            <th>
+                                Payment Date
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="paymentTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <div
+                id="paymentMessage"
+                class="message">
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             FEEDBACK
+             ===================================================== -->
+
+        <div
+            class="data-section"
+            id="feedbackSection"
+            style="display:none;">
+
+            <h2>
+                ⭐ Customer Feedback
+            </h2>
+
+            <p class="section-description">
+                All feedback submitted by customers
+            </p>
+
+            <button
+                class="refresh-btn"
+                onclick="loadFeedback()">
+
+                Refresh Feedback
+
+            </button>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Feedback ID
+                            </th>
+
+                            <th>
+                                Customer ID
+                            </th>
+
+                            <th>
+                                Trip ID
+                            </th>
+
+                            <th>
+                                Booking ID
+                            </th>
+
+                            <th>
+                                Rating
+                            </th>
+
+                            <th>
+                                Comments
+                            </th>
+
+                            <th>
+                                Feedback Date
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="feedbackTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <div
+                id="feedbackMessage"
+                class="message">
+
+            </div>
+
+        </div>
+
+
+
+        <div class="footer">
+
+            RideSphere Admin Panel
+
+        </div>
+
+    </div>
+
+
+
+<script>
+
+
+    /* =====================================================
+       SERVICE URLs
+       ===================================================== */
+
+    const BOOKING_SERVICE_URL =
+        "http://localhost:8084/bookings";
+
+    const PAYMENT_SERVICE_URL =
+        "http://localhost:8085/payments";
+
+    const FEEDBACK_SERVICE_URL =
+        "http://localhost:8087/feedbacks";
+
+
+
+    /* =====================================================
+       DRIVER MANAGEMENT
+       ===================================================== */
+
+    function openDrivers() {
+
+        window.location.href =
+            "driver-management.html";
+
+    }
+
+
+
+    /* =====================================================
+       VEHICLE MANAGEMENT
+       ===================================================== */
+
+    function openVehicles() {
+
+        window.location.href =
+            "add-vehicle.html";
+
+    }
+
+
+
+    /* =====================================================
+       TRIP MANAGEMENT
+       ===================================================== */
+
+    function openTrips() {
+
+        window.location.href =
+            "trips.html";
+
+    }
+
+
+
+    /* =====================================================
+       SHOW BOOKINGS
+       ===================================================== */
+
+    function showBookings() {
+
+        document.getElementById(
+            "bookingSection"
+        ).style.display = "block";
+
+        document.getElementById(
+            "paymentSection"
+        ).style.display = "none";
+
+        document.getElementById(
+            "feedbackSection"
+        ).style.display = "none";
+
+
+        loadBookings();
+
+        document.getElementById(
+            "bookingSection"
+        ).scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
+
+
+
+    /* =====================================================
+       SHOW PAYMENTS
+       ===================================================== */
+
+    function showPayments() {
+
+        document.getElementById(
+            "bookingSection"
+        ).style.display = "none";
+
+        document.getElementById(
+            "paymentSection"
+        ).style.display = "block";
+
+        document.getElementById(
+            "feedbackSection"
+        ).style.display = "none";
+
+
+        loadPayments();
+
+        document.getElementById(
+            "paymentSection"
+        ).scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
+
+
+
+    /* =====================================================
+       SHOW FEEDBACK
+       ===================================================== */
+
+    function showFeedback() {
+
+        document.getElementById(
+            "bookingSection"
+        ).style.display = "none";
+
+        document.getElementById(
+            "paymentSection"
+        ).style.display = "none";
+
+        document.getElementById(
+            "feedbackSection"
+        ).style.display = "block";
+
+
+        loadFeedback();
+
+        document.getElementById(
+            "feedbackSection"
+        ).scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
+
+
+
+    /* =====================================================
+       LOAD ALL BOOKINGS
+       ===================================================== */
+
+    async function loadBookings() {
+
+        const table =
+            document.getElementById(
+                "bookingTable"
+            );
+
+        const message =
+            document.getElementById(
+                "bookingMessage"
+            );
+
+
+        table.innerHTML = "";
+
+        message.innerText =
+            "Loading bookings...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    BOOKING_SERVICE_URL
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Unable to fetch bookings"
+                );
+
+            }
+
+
+            const bookings =
+                await response.json();
+
+
+            if (bookings.length === 0) {
+
+                message.innerText =
+                    "No bookings found.";
+
+                return;
+
+            }
+
+
+            message.innerText = "";
+
+
+            bookings.forEach(
+                booking => {
+
+                    const row =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    row.innerHTML = `
+
+                        <td>
+                            ${booking.id}
+                        </td>
+
+                        <td>
+                            ${booking.customerId}
+                        </td>
+
+                        <td>
+                            ${booking.vehicleId}
+                        </td>
+
+                        <td>
+                            ${booking.date || "-"}
+                        </td>
+
+                        <td>
+                            ${booking.durationdays} days
+                        </td>
+
+                        <td>
+                            ${booking.driverRequired
+                                ? "Yes"
+                                : "No"}
+                        </td>
+
+                        <td>
+                            ${booking.driverId ?? "-"}
+                        </td>
+
+                        <td>
+                            ${booking.status || "-"}
+                        </td>
+
+                    `;
+
+
+                    table.appendChild(row);
+
+                }
+            );
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            message.innerText =
+                "Unable to load bookings. Please check Booking Service.";
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       LOAD ALL PAYMENTS
+       ===================================================== */
+
+    async function loadPayments() {
+
+        const table =
+            document.getElementById(
+                "paymentTable"
+            );
+
+        const message =
+            document.getElementById(
+                "paymentMessage"
+            );
+
+
+        table.innerHTML = "";
+
+        message.innerText =
+            "Loading payments...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    PAYMENT_SERVICE_URL
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Unable to fetch payments"
+                );
+
+            }
+
+
+            const payments =
+                await response.json();
+
+
+            if (payments.length === 0) {
+
+                message.innerText =
+                    "No payments found.";
+
+                return;
+
+            }
+
+
+            message.innerText = "";
+
+
+            payments.forEach(
+                payment => {
+
+                    let statusClass = "";
+
+
+                    if (
+                        payment.status &&
+                        payment.status.toUpperCase()
+                            === "PAID"
+                    ) {
+
+                        statusClass = "paid";
+
+                    }
+
+                    else if (
+                        payment.status &&
+                        payment.status.toUpperCase()
+                            === "PENDING"
+                    ) {
+
+                        statusClass = "pending";
+
+                    }
+
+                    else if (
+                        payment.status &&
+                        payment.status.toUpperCase()
+                            === "FAILED"
+                    ) {
+
+                        statusClass = "failed";
+
+                    }
+
+
+                    const row =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    row.innerHTML = `
+
+                        <td>
+                            ${payment.id}
+                        </td>
+
+                        <td>
+                            ${payment.customerid}
+                        </td>
+
+                        <td>
+                            ${payment.bookingid}
+                        </td>
+
+                        <td>
+                            ₹${payment.amount}
+                        </td>
+
+                        <td>
+                            ${payment.paymentdate || "-"}
+                        </td>
+
+                        <td class="${statusClass}">
+                            ${payment.status || "-"}
+                        </td>
+
+                    `;
+
+
+                    table.appendChild(row);
+
+                }
+            );
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            message.innerText =
+                "Unable to load payments. Please check Payment Service.";
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       LOAD ALL FEEDBACK
+       ===================================================== */
+
+    async function loadFeedback() {
+
+        const table =
+            document.getElementById(
+                "feedbackTable"
+            );
+
+        const message =
+            document.getElementById(
+                "feedbackMessage"
+            );
+
+
+        table.innerHTML = "";
+
+        message.innerText =
+            "Loading feedback...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    FEEDBACK_SERVICE_URL
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Unable to fetch feedback"
+                );
+
+            }
+
+
+            const feedbackList =
+                await response.json();
+
+
+            if (feedbackList.length === 0) {
+
+                message.innerText =
+                    "No feedback found.";
+
+                return;
+
+            }
+
+
+            message.innerText = "";
+
+
+            feedbackList.forEach(
+                feedback => {
+
+                    const rating =
+                        Number(
+                            feedback.ratingscore
+                        ) || 0;
+
+
+                    let stars = "";
+
+
+                    for (
+                        let i = 1;
+                        i <= 5;
+                        i++
+                    ) {
+
+                        if (i <= rating) {
+
+                            stars += "★";
+
+                        } else {
+
+                            stars += "☆";
+
+                        }
+
+                    }
+
+
+                    const row =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    row.innerHTML = `
+
+                        <td>
+                            ${feedback.id}
+                        </td>
+
+                        <td>
+                            ${feedback.customerid}
+                        </td>
+
+                        <td>
+                            ${feedback.tripid}
+                        </td>
+
+                        <td>
+                            ${feedback.bookingid}
+                        </td>
+
+                        <td class="rating">
+
+                            ${stars}
+
+                            <br>
+
+                            ${rating}/5
+
+                        </td>
+
+                        <td>
+                            ${feedback.comments || "-"}
+                        </td>
+
+                        <td>
+                            ${feedback.feedbackdate || "-"}
+                        </td>
+
+                    `;
+
+
+                    table.appendChild(row);
+
+                }
+            );
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            message.innerText =
+                "Unable to load feedback. Please check Feedback Service.";
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       LOGOUT
+       ===================================================== */
+
+    function logout() {
+
+        localStorage.removeItem(
+            "admin"
+        );
+
+        window.location.href =
+            "admin-login.html";
+
+    }
+
+
+</script>
+
+
+</body>
+
+</html>

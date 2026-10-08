@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | RideSphere</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Times New Roman", serif;
+            background: #1f1712;
+            color: #f1e8dc;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 70px;
+            background: #2d211a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 45px;
+            border-bottom: 1px solid #5c4636;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #f1e8dc;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #e5d6c5;
+            font-size: 17px;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* MAIN */
+
+        .profile-container {
+            min-height: calc(100vh - 70px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .profile-card {
+            width: 450px;
+            background: #2d211a;
+            border: 1px solid #5c4636;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .profile-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-title h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .profile-title p {
+            color: #bfae9c;
+            font-size: 16px;
+        }
+
+        /* PROFILE ICON */
+
+        .profile-icon {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: #4a3628;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 25px;
+            font-size: 42px;
+        }
+
+        /* DETAILS */
+
+        .profile-detail {
+            margin-bottom: 20px;
+        }
+
+        .profile-detail label {
+            display: block;
+            color: #bfae9c;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .profile-detail p {
+            background: #211813;
+            border: 1px solid #5c4636;
+            padding: 12px;
+            font-size: 17px;
+        }
+
+        /* BUTTONS */
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        button,
+        .back-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            font-family: "Times New Roman", serif;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .back-btn {
+            background: #4a3628;
+            color: #f1e8dc;
+        }
+
+        .logout-btn {
+            background: #6b3e2e;
+            color: white;
+        }
+
+        button:hover,
+        .back-btn:hover {
+            opacity: 0.85;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 14px;
+            }
+
+            .profile-card {
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            🚗 RideSphere
+        </div>
+
+        <div class="nav-links">
+
+            <a href="Home.html	">Home</a>
+
+            <a href="vehicles.html">Vehicles</a>
+
+            <a href="mybooking.html">My Bookings</a>
+
+        </div>
+
+    </div>
+
+
+    <!-- PROFILE -->
+
+    <div class="profile-container">
+
+        <div class="profile-card">
+
+            <div class="profile-title">
+
+                <div class="profile-icon">
+                    👤
+                </div>
+
+                <h1>My Profile</h1>
+
+                <p>Your RideSphere account details</p>
+
+            </div>
+
+
+            <div class="profile-detail">
+
+                <label>Name</label>
+
+                <p id="name">
+                    Loading...
+                </p>
+
+            </div>
+
+
+            <div class="profile-detail">
+
+                <label>Email</label>
+
+                <p id="email">
+                    Loading...
+                </p>
+
+            </div>
+
+
+            <div class="profile-detail">
+
+                <label>Mobile</label>
+
+                <p id="mobile">
+                    Loading...
+                </p>
+
+            </div>
+
+
+            <div class="buttons">
+
+                <a href="Home.html"
+                   class="back-btn">
+                    Back
+                </a>
+
+                <button
+                    class="logout-btn"
+                    onclick="logout()">
+                    Logout
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        // GET LOGGED-IN CUSTOMER
+
+        const customerData =
+            localStorage.getItem("customer");
+
+
+        // IF CUSTOMER IS NOT LOGGED IN
+
+        if (!customerData) {
+
+            window.location.href = "login.html";
+
+        }
+
+
+        // CONVERT JSON INTO OBJECT
+
+        const customer =
+            JSON.parse(customerData);
+
+
+        // DISPLAY CUSTOMER DETAILS
+
+        document.getElementById("name").textContent =
+            customer.name;
+
+        document.getElementById("email").textContent =
+            customer.email;
+
+        document.getElementById("mobile").textContent =
+            customer.mobile;
+
+
+        // LOGOUT
+
+        function logout() {
+
+            localStorage.removeItem("customer");
+
+            localStorage.removeItem("selectedVehicleId");
+
+            localStorage.removeItem("paymentBookingId");
+
+            window.location.href = "index.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

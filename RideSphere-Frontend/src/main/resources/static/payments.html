@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>RideSphere - Payment</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Times New Roman", serif;
+            background: #21140f;
+            color: #f1e8dc;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            height: 70px;
+            background: #f1e8dc;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 50px;
+        }
+
+        .logo {
+            color: #2b1a14;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2b1a14;
+            font-size: 18px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+
+            margin: 50px auto;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .heading h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .heading p {
+            font-size: 18px;
+            color: #d6c5b5;
+        }
+
+
+        /* =========================
+           PAYMENT BOX
+        ========================= */
+
+        .payment-box {
+            background: #302019;
+            border: 1px solid #5b4032;
+
+            padding: 35px;
+        }
+
+
+        /* =========================
+           BOOKING DETAILS
+        ========================= */
+
+        .details {
+            background: #241610;
+
+            border: 1px solid #5b4032;
+
+            padding: 30px;
+
+            margin-bottom: 30px;
+        }
+
+        .details h2 {
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+
+            border-bottom: 1px solid #5b4032;
+
+            padding: 12px 0;
+
+            font-size: 18px;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            color: #d8bfa9;
+        }
+
+        .value {
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           TOTAL
+        ========================= */
+
+        .total {
+            background: #21140f;
+
+            border: 1px solid #705242;
+
+            padding: 20px;
+
+            margin-bottom: 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total span:first-child {
+            font-size: 22px;
+        }
+
+        #totalAmount {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           PAYMENT FORM
+        ========================= */
+
+        .payment-form h2 {
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        input,
+        select {
+
+            width: 100%;
+
+            padding: 12px;
+
+            background: #21140f;
+
+            border: 1px solid #705242;
+
+            color: #f1e8dc;
+
+            font-family: "Times New Roman", serif;
+
+            font-size: 16px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #c9ad95;
+        }
+
+
+        /* =========================
+           PAY BUTTON
+        ========================= */
+
+        .pay-btn {
+
+            width: 100%;
+
+            padding: 14px;
+
+            background: #f1e8dc;
+
+            color: #2b1a14;
+
+            border: none;
+
+            font-family: "Times New Roman", serif;
+
+            font-size: 19px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 10px;
+        }
+
+        .pay-btn:hover {
+            background: #d8c5b3;
+        }
+
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        .message {
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            font-size: 18px;
+
+            color: #d8bfa9;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 14px;
+            }
+
+            .heading h1 {
+                font-size: 32px;
+            }
+
+            .payment-box {
+                padding: 20px;
+            }
+
+            .detail-row {
+                font-size: 16px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav>
+
+        <div class="logo">
+            🚗 RideSphere
+        </div>
+
+        <div class="nav-links">
+
+            <a href="Home.html">
+                Home
+            </a>
+
+            <a href="vehicles.html">
+                Vehicles
+            </a>
+
+            <a href="mybooking.html">
+                My Bookings
+            </a>
+
+            <a href="#" onclick="logout()">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         MAIN PAGE
+    ========================= -->
+
+    <div class="container">
+
+
+        <div class="heading">
+
+            <h1>
+                Make Payment
+            </h1>
+
+            <p>
+                Complete your payment for the selected booking.
+            </p>
+
+        </div>
+
+
+
+        <div class="payment-box">
+
+
+            <!-- =========================
+                 BOOKING DETAILS
+            ========================= -->
+
+            <div class="details">
+
+                <h2>
+                    Booking Details
+                </h2>
+
+
+                <div class="detail-row">
+
+                    <span class="label">
+                        Booking ID
+                    </span>
+
+                    <span
+                        class="value"
+                        id="bookingId">
+                        Loading...
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="label">
+                        Vehicle
+                    </span>
+
+                    <span
+                        class="value"
+                        id="vehicleName">
+                        Loading...
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="label">
+                        Model
+                    </span>
+
+                    <span
+                        class="value"
+                        id="vehicleModel">
+                        Loading...
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="label">
+                        Vehicle Type
+                    </span>
+
+                    <span
+                        class="value"
+                        id="vehicleType">
+                        Loading...
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="label">
+                        Start Date
+                    </span>
+
+                    <span
+                        class="value"
+                        id="bookingDate">
+                        Loading...
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="label">
+                        Duration
+                    </span>
+
+                    <span
+                        class="value"
+                        id="duration">
+                        Loading...
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="label">
+                        Daily Fee
+                    </span>
+
+                    <span
+                        class="value">
+                        ₹<span id="dailyFee">0</span>
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 TOTAL AMOUNT
+            ========================= -->
+
+            <div class="total">
+
+                <span>
+                    Total Amount
+                </span>
+
+                <span id="totalAmount">
+                    ₹0
+                </span>
+
+            </div>
+
+
+
+            <!-- =========================
+                 PAYMENT FORM
+            ========================= -->
+
+            <div class="payment-form">
+
+                <h2>
+                    Payment Details
+                </h2>
+
+
+                <form id="paymentForm">
+
+
+                    <div class="form-group">
+
+                        <label for="paymentDate">
+                            Payment Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="paymentDate"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="paymentStatus">
+                            Payment Status
+                        </label>
+
+                        <select
+                            id="paymentStatus"
+                            required>
+
+                           
+
+                            <option value="PENDING">
+                                PENDING
+                            </option>
+							<option value="PAID">
+							                               PAID
+							                           </option>
+                        </select>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="pay-btn">
+
+                        Pay Now
+
+                    </button>
+
+                </form>
+
+
+                <div
+                    class="message"
+                    id="message">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+
+        // =========================
+        // CHECK CUSTOMER LOGIN
+        // =========================
+
+        const customerData =
+            localStorage.getItem("customer");
+
+
+        if (!customerData) {
+
+            alert("Please login first.");
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+        const customer =
+            JSON.parse(customerData);
+
+
+
+        // =========================
+        // GET BOOKING ID
+        // =========================
+
+        const bookingId =
+            localStorage.getItem("paymentBookingId");
+
+
+        if (!bookingId) {
+
+            alert("No booking selected for payment.");
+
+            window.location.href =
+                "mybooking.html";
+
+        }
+
+
+
+        // =========================
+        // SERVICES
+        // =========================
+
+        const BOOKING_SERVICE =
+            "http://localhost:8084";
+
+        const VEHICLE_SERVICE =
+            "http://localhost:8082";
+
+
+        let bookingData = null;
+
+        let vehicleData = null;
+
+        let totalAmount = 0;
+
+
+
+        // =========================
+        // SET TODAY'S DATE
+        // =========================
+
+        const today =
+            new Date()
+                .toISOString()
+                .split("T")[0];
+
+
+        document.getElementById(
+            "paymentDate"
+        ).value = today;
+
+
+
+        // =========================
+        // LOAD BOOKING
+        // =========================
+
+        async function loadBooking() {
+
+            try {
+
+                /*
+                 * First we fetch the booking.
+                 *
+                 * We DON'T use selectedVehicleId.
+                 */
+
+                const bookingResponse =
+                    await fetch(
+                        BOOKING_SERVICE +
+                        "/bookings/" +
+                        bookingId
+                    );
+
+
+                if (!bookingResponse.ok) {
+
+                    throw new Error(
+                        "Booking not found"
+                    );
+
+                }
+
+
+                bookingData =
+                    await bookingResponse.json();
+
+
+                console.log(
+                    "Booking:",
+                    bookingData
+                );
+
+
+                // =========================
+                // CHECK CUSTOMER
+                // =========================
+
+                if (
+                    Number(bookingData.customerId)
+                    !==
+                    Number(customer.id)
+                ) {
+
+                    throw new Error(
+                        "This booking does not belong to the logged-in customer."
+                    );
+
+                }
+
+
+                // =========================
+                // DISPLAY BOOKING
+                // =========================
+
+                document.getElementById(
+                    "bookingId"
+                ).textContent =
+                    bookingData.id;
+
+
+                document.getElementById(
+                    "bookingDate"
+                ).textContent =
+                    bookingData.date;
+
+
+                document.getElementById(
+                    "duration"
+                ).textContent =
+                    bookingData.durationdays +
+                    " day(s)";
+
+
+                // =========================
+                // GET VEHICLE ID
+                // FROM BOOKING
+                // =========================
+
+                const vehicleId =
+                    bookingData.vehicleId;
+
+
+                console.log(
+                    "Vehicle ID from booking:",
+                    vehicleId
+                );
+
+
+                if (!vehicleId) {
+
+                    throw new Error(
+                        "Vehicle ID is missing from booking."
+                    );
+
+                }
+
+
+                // =========================
+                // FETCH VEHICLE
+                // =========================
+
+                const vehicleResponse =
+                    await fetch(
+                        VEHICLE_SERVICE +
+                        "/vehicles/" +
+                        vehicleId
+                    );
+
+
+                if (!vehicleResponse.ok) {
+
+                    throw new Error(
+                        "Vehicle not found. Vehicle ID: "
+                        + vehicleId
+                    );
+
+                }
+
+
+                vehicleData =
+                    await vehicleResponse.json();
+
+
+                console.log(
+                    "Vehicle:",
+                    vehicleData
+                );
+
+
+                // =========================
+                // DISPLAY VEHICLE
+                // =========================
+
+                document.getElementById(
+                    "vehicleName"
+                ).textContent =
+                    vehicleData.vehiclename;
+
+
+                document.getElementById(
+                    "vehicleModel"
+                ).textContent =
+                    vehicleData.model;
+
+
+                document.getElementById(
+                    "vehicleType"
+                ).textContent =
+                    vehicleData.type;
+
+
+                document.getElementById(
+                    "dailyFee"
+                ).textContent =
+                    vehicleData.dailyfee;
+
+
+                // =========================
+                // CALCULATE TOTAL
+                // =========================
+
+                totalAmount =
+                    Number(vehicleData.dailyfee)
+                    *
+                    Number(bookingData.durationdays);
+
+
+                document.getElementById(
+                    "totalAmount"
+                ).textContent =
+                    "₹" + totalAmount;
+
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Payment Loading Error:",
+                    error
+                );
+
+
+                document.getElementById(
+                    "message"
+                ).textContent =
+                    error.message;
+
+            }
+
+        }
+
+
+
+        // =========================
+        // LOAD BOOKING
+        // =========================
+
+        loadBooking();
+
+
+
+        // =========================
+        // PAYMENT FORM
+        // =========================
+
+        document.getElementById(
+            "paymentForm"
+        ).addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                // =========================
+                // CHECK DATA
+                // =========================
+
+                if (!bookingData) {
+
+                    alert(
+                        "Booking information is not loaded yet."
+                    );
+
+                    return;
+
+                }
+
+
+                if (!vehicleData) {
+
+                    alert(
+                        "Vehicle information is not loaded yet."
+                    );
+
+                    return;
+
+                }
+
+
+                // =========================
+                // PAYMENT DETAILS
+                // =========================
+
+                const paymentDate =
+                    document.getElementById(
+                        "paymentDate"
+                    ).value;
+
+
+                const status =
+                    document.getElementById(
+                        "paymentStatus"
+                    ).value;
+
+
+
+                // =========================
+                // CREATE PAYMENT OBJECT
+                // =========================
+
+                const payment = {
+
+                    customerid:
+                        Number(customer.id),
+
+                    bookingid:
+                        Number(bookingData.id),
+
+                    amount:
+                        Number(totalAmount),
+
+                    paymentdate:
+                        paymentDate,
+
+                    status:
+                        status
+
+                };
+
+
+                console.log(
+                    "Payment being sent:",
+                    payment
+                );
+
+
+
+                // =========================
+                // SEND PAYMENT
+                // =========================
+
+                try {
+
+                    /*
+                     * IMPORTANT:
+                     *
+                     * Put your actual Payment Service
+                     * port here.
+                     *
+                     * Example:
+                     * http://localhost:8085
+                     *
+                     * if your Payment Service is running
+                     * on port 8085.
+                     */
+
+                    const PAYMENT_SERVICE =
+                        "http://localhost:8085";
+
+
+                    const response =
+                        await fetch(
+                            PAYMENT_SERVICE +
+                            "/payments",
+                            {
+
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify(payment)
+
+                            }
+                        );
+
+
+                    const result =
+                        await response.text();
+
+
+                    console.log(
+                        "Payment response:",
+                        result
+                    );
+
+
+                    // =========================
+                    // PAYMENT SUCCESS
+                    // =========================
+
+                    if (
+                        response.ok &&
+                        result === "Payment successfull"
+                    ) {
+
+                        alert(
+                            "Payment successful!"
+                        );
+
+
+                        localStorage.removeItem(
+                            "paymentBookingId"
+                        );
+
+
+                        window.location.href =
+                            "mybooking.html";
+
+                    }
+
+                    else {
+
+                        document.getElementById(
+                            "message"
+                        ).textContent =
+                            result ||
+                            "Payment failed.";
+
+                    }
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "Payment Error:",
+                        error
+                    );
+
+
+                    document.getElementById(
+                        "message"
+                    ).textContent =
+                        "Unable to connect to Payment Service.";
+
+                }
+
+            }
+        );
+
+
+
+        // =========================
+        // LOGOUT
+        // =========================
+
+        function logout() {
+
+            localStorage.removeItem(
+                "customer"
+            );
+
+            localStorage.removeItem(
+                "selectedVehicleId"
+            );
+
+            localStorage.removeItem(
+                "paymentBookingId"
+            );
+
+
+            window.location.href =
+                "login.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

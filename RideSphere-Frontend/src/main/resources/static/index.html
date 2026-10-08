@@ -1,0 +1,307 @@
+```html
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>RideSphere - Welcome</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Background Image */
+
+        .car-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+
+        /* Dark Overlay */
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.35);
+            z-index: 1;
+        }
+
+
+        /* Navigation Bar */
+
+        .navbar {
+            position: absolute;
+            top: 25px;
+            left: 0;
+            width: 100%;
+            height: 58px;
+
+            background-color: #F1E8DC;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 45px;
+
+            z-index: 3;
+
+            font-family: "Times New Roman", Times, serif;
+
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+        }
+
+
+        /* Logo */
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2B1B14;
+        }
+
+
+        /* Navigation Links */
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2B1B14;
+            font-size: 16px;
+        }
+
+
+        .nav-links a:hover {
+            color: #6B4535;
+        }
+
+
+        /* Main Content */
+
+        .content {
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            z-index: 3;
+
+            text-align: center;
+
+            color: #F1E8DC;
+
+            font-family: "Times New Roman", Times, serif;
+
+            width: 90%;
+        }
+
+
+        /* Welcome Heading */
+
+        .content h1 {
+            font-size: 42px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+
+        /* Tagline */
+
+        .content p {
+            font-size: 22px;
+            font-style: italic;
+            letter-spacing: 1px;
+            margin-bottom: 35px;
+        }
+
+
+        /* Selection Text */
+
+        .content h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+
+        /* Buttons Container */
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+
+
+        /* Customer/Admin Buttons */
+
+        .role-button {
+            width: 180px;
+            padding: 14px 20px;
+
+            background-color: #F1E8DC;
+
+            color: #2B1B14;
+
+            border: none;
+
+            font-family: "Times New Roman", Times, serif;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            text-decoration: none;
+
+            display: inline-block;
+
+            transition: 0.3s;
+        }
+
+
+        .role-button:hover {
+            background-color: #2B1B14;
+            color: #F1E8DC;
+        }
+
+
+        /* Small line */
+
+        .line {
+            width: 230px;
+            height: 1px;
+
+            background-color: #F1E8DC;
+
+            margin: 12px auto 20px auto;
+        }
+
+
+        /* Responsive Design */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a {
+                font-size: 14px;
+            }
+
+            .content h1 {
+                font-size: 30px;
+            }
+
+            .content p {
+                font-size: 18px;
+            }
+
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .role-button {
+                width: 200px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Background Image -->
+
+    <img src="car.jpeg" class="car-image">
+
+
+    <!-- Dark Overlay -->
+
+    <div class="overlay"></div>
+
+
+    <!-- Navigation Bar -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            RideSphere
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="about.html">About</a>
+
+            <a href="contact.html">Contact</a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Main Entry Content -->
+
+    <div class="content">
+
+        <h1>WELCOME TO RIDESPHERE</h1>
+
+        <div class="line"></div>
+
+        <p>Your Ride, Our Priority</p>
+
+        <h2>Continue As</h2>
+
+
+        <div class="buttons">
+
+            <a href="login.html" class="role-button">
+                Customer
+            </a>
+
+
+            <a href="admin-login.html" class="role-button">
+                Admin
+            </a>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
+```

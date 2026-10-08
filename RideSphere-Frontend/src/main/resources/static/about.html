@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RideSphere | About</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Times New Roman", Times, serif;
+            background: #0D0907;
+            color: #E8DDD2;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+
+        nav {
+            height: 80px;
+            padding: 0 70px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: #21140F;
+            border-bottom: 1px solid #5A3A2B;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            color: #E8DDD2;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .nav-links a:hover {
+            color: #D4C5B8;
+        }
+
+        /* About */
+
+        .about {
+            min-height: calc(100vh - 130px);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px 70px;
+        }
+
+        .about-container {
+            max-width: 1100px;
+            text-align: center;
+        }
+
+        .about-container h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .about-container h1 span {
+            color: #D4C5B8;
+        }
+
+        .about-container > p {
+            font-size: 19px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            color: #BFAFA4;
+        }
+
+        /* Cards */
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .feature-card {
+            width: 320px;
+            padding: 25px;
+
+            background: #21140F;
+            border: 1px solid #5A3A2B;
+        }
+
+        .feature-card h2 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            font-size: 17px;
+            line-height: 1.5;
+            color: #BFAFA4;
+        }
+
+        /* Footer */
+
+        footer {
+            height: 50px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #21140F;
+            border-top: 1px solid #5A3A2B;
+
+            color: #9B8C82;
+            font-size: 14px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <nav>
+
+        <div class="logo">
+            RideSphere
+        </div>
+
+        <div class="nav-links">
+
+            <a href="index.html">Home</a>
+
+            <a href="about.html">About</a>
+
+            <a href="contact.html">Contact</a>
+
+            <a href="login.html">Login</a>
+
+            <a href="register.html">Register</a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- About Section -->
+
+    <section class="about">
+
+        <div class="about-container">
+
+            <h1>
+                About <span>RideSphere</span>
+            </h1>
+
+            <p>
+                RideSphere is a vehicle rental and booking system
+                designed to make finding, booking, and managing
+                vehicles simple and convenient.
+            </p>
+
+            <p>
+                The system provides a smooth journey from vehicle
+                selection and booking to payment, trip management,
+                and customer feedback.
+            </p>
+
+
+            <div class="features">
+
+                <div class="feature-card">
+
+                    <h2>Vehicle Rental</h2>
+
+                    <p>
+                        Browse available vehicles and view details
+                        such as vehicle name, model, type, and
+                        daily rental fee.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <h2>Easy Booking</h2>
+
+                    <p>
+                        Customers can select a vehicle and create
+                        and manage their bookings easily.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <h2>Complete Journey</h2>
+
+                    <p>
+                        Manage the complete journey from booking
+                        and payment to trip information and feedback.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        © 2026 RideSphere. All Rights Reserved.
+
+    </footer>
+
+</body>
+
+</html>

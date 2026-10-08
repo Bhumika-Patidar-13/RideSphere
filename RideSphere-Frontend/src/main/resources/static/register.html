@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RideSphere | Register</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Times New Roman", Times, serif;
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+            padding-right: 100px;
+        }
+
+        /* Background Image */
+
+        .car-image {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            z-index: -1;
+        }
+
+        /* Registration Box */
+
+        .register-box {
+            width: 400px;
+
+            padding: 35px;
+
+            background: rgba(33, 20, 15, 0.92);
+
+            border: 1px solid #5A3A2B;
+
+            z-index: 1;
+        }
+
+        .register-box h1 {
+            text-align: center;
+
+            color: #E8DDD2;
+
+            font-size: 32px;
+
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+
+            color: #E8DDD2;
+
+            font-size: 17px;
+
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 11px;
+
+            margin-bottom: 20px;
+
+            background: #0D0907;
+
+            color: #E8DDD2;
+
+            border: 1px solid #5A3A2B;
+
+            font-family: "Times New Roman", Times, serif;
+
+            font-size: 16px;
+
+            outline: none;
+        }
+
+        input::placeholder {
+            color: #9B8C82;
+        }
+
+        input:focus {
+            border-color: #E8DDD2;
+        }
+
+        button {
+            width: 100%;
+
+            padding: 12px;
+
+            background: #E8DDD2;
+
+            color: #21140F;
+
+            border: none;
+
+            font-family: "Times New Roman", Times, serif;
+
+            font-size: 18px;
+
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #D4C5B8;
+        }
+
+        /* Login Link */
+
+        .login-link {
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #E8DDD2;
+
+            font-size: 16px;
+        }
+
+        .login-link a {
+            color: #E8DDD2;
+
+            font-weight: bold;
+
+            text-decoration: underline;
+        }
+
+        .login-link a:hover {
+            color: #D4C5B8;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- Background Image -->
+
+    <img src="bike.png" class="car-image">
+
+
+    <!-- Registration Form -->
+
+    <div class="register-box">
+
+        <h1>Create Account</h1>
+
+		<form id="registerForm">
+
+		    <label for="name">Name</label>
+
+		    <input
+		        type="text"
+		        id="name"
+		        name="name"
+		        placeholder="Enter your name"
+		        required
+		    >
+
+		    <label for="email">Email</label>
+
+		    <input
+		        type="email"
+		        id="email"
+		        name="email"
+		        placeholder="Enter your email"
+		        required
+		    >
+
+		    <label for="mobile">Mobile</label>
+
+		    <input
+		        type="tel"
+		        id="mobile"
+		        name="mobile"
+		        placeholder="Enter your mobile number"
+		        required
+		    >
+
+		    <button type="submit">
+		        Register
+		    </button>
+
+		</form>		<script>
+
+		document.getElementById("registerForm").addEventListener("submit", async function(event) {
+
+		    event.preventDefault();
+
+		    const name = document.getElementById("name").value;
+		    const email = document.getElementById("email").value;
+		    const mobile = document.getElementById("mobile").value;
+
+		    try {
+
+		        const response = await fetch(
+		            "http://localhost:8081/customers",
+		            {
+		                method: "POST",
+
+		                headers: {
+		                    "Content-Type": "application/json"
+		                },
+
+		                body: JSON.stringify({
+		                    name: name,
+		                    email: email,
+		                    mobile: Number(mobile)
+		                })
+		            }
+		        );
+
+		        if (response.ok) {
+
+		            const customer = await response.json();
+
+		            alert("Registration successful!");
+
+		            window.location.href = "login.html";
+
+		        } else {
+
+		            alert("Registration failed. Please try again.");
+
+		        }
+
+		    } catch (error) {
+
+		        console.error("Registration Error:", error);
+
+		        alert("Unable to connect to Customer Service.");
+
+		    }
+
+		});
+
+		</script>
+        <!-- Login Link -->
+
+        <div class="login-link">
+
+            Already have an account?
+
+            <a href="login.html">Login here</a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

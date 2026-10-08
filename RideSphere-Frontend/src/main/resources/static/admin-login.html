@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RideSphere - Admin Login</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Times New Roman", serif;
+            min-height: 100vh;
+            background: #21140f;
+            color: #f1e8dc;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            width: 400px;
+            background: #302019;
+            padding: 40px;
+            border: 1px solid #5b4032;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #cdb9a8;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+
+            background: #21140f;
+            color: #f1e8dc;
+
+            border: 1px solid #705242;
+
+            font-family: "Times New Roman", serif;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #c9ad95;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+
+            background: #f1e8dc;
+            color: #2b1a14;
+
+            border: none;
+
+            font-family: "Times New Roman", serif;
+            font-size: 18px;
+            font-weight: bold;
+
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #d8c5b3;
+        }
+
+        .back {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .back a {
+            color: #d8bfa9;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .back a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="login-container">
+
+        <div class="logo">
+            🚗 RideSphere
+        </div>
+
+        <div class="title">
+            Admin Login
+        </div>
+
+        <div class="subtitle">
+            Login to manage RideSphere
+        </div>
+
+
+        <form id="adminLoginForm">
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter username"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter password"
+                    required
+                >
+
+            </div>
+
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+
+        <div class="back">
+
+            <a href="index.html">
+                ← Back to Home
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        document.getElementById("adminLoginForm")
+            .addEventListener("submit", async function(event) {
+
+                event.preventDefault();
+
+
+                const username =
+                    document.getElementById("username").value;
+
+                const password =
+                    document.getElementById("password").value;
+
+
+                try {
+
+                    const response = await fetch(
+                        "http://localhost:8088/admins/login",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                username: username,
+                                password: password
+                            })
+                        }
+                    );
+
+
+                    if (response.ok) {
+
+                        const admin =
+                            await response.json();
+
+                        localStorage.setItem(
+                            "admin",
+                            JSON.stringify(admin)
+                        );
+
+                        alert("Admin login successful!");
+
+                        window.location.href =
+                            "admin-dashboard.html";
+
+                    }
+                    else if (response.status === 404) {
+
+                        alert(
+                            "Invalid username or password."
+                        );
+
+                    }
+                    else {
+
+                        alert(
+                            "Something went wrong. Please try again."
+                        );
+
+                    }
+
+                }
+                catch (error) {
+
+                    console.error(
+                        "Admin Login Error:",
+                        error
+                    );
+
+                    alert(
+                        "Unable to connect to Admin Service."
+                    );
+
+                }
+
+            });
+
+    </script>
+
+</body>
+
+</html>

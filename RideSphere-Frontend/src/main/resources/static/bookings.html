@@ -1,0 +1,1504 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RideSphere - Book Vehicle</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family: "Times New Roman", serif;
+
+            background: #21140f;
+
+            color: #f1e8dc;
+
+            min-height: 100vh;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+
+            height: 70px;
+
+            background: #f1e8dc;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 50px;
+        }
+
+
+        .logo {
+
+            color: #2b1a14;
+
+            font-size: 28px;
+
+            font-weight: bold;
+        }
+
+
+        .nav-links {
+
+            display: flex;
+
+            gap: 30px;
+        }
+
+
+        .nav-links a {
+
+            text-decoration: none;
+
+            color: #2b1a14;
+
+            font-size: 18px;
+        }
+
+
+        .nav-links a:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .container {
+
+            width: 90%;
+
+            max-width: 1100px;
+
+            margin: 50px auto;
+        }
+
+
+        .heading {
+
+            text-align: center;
+
+            margin-bottom: 35px;
+        }
+
+
+        .heading h1 {
+
+            font-size: 40px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .heading p {
+
+            font-size: 18px;
+
+            color: #d6c5b5;
+        }
+
+
+        /* =========================
+           BOOKING BOX
+        ========================= */
+
+        .booking-box {
+
+            background: #302019;
+
+            border: 1px solid #5b4032;
+
+            padding: 35px;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 35px;
+        }
+
+
+        /* =========================
+           VEHICLE DETAILS
+        ========================= */
+
+        .vehicle-details {
+
+            background: #241610;
+
+            padding: 30px;
+
+            border: 1px solid #5b4032;
+        }
+
+
+        .vehicle-details h2 {
+
+            font-size: 28px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .vehicle-details p {
+
+            font-size: 18px;
+
+            margin: 15px 0;
+        }
+
+
+        .vehicle-details span {
+
+            color: #d8bfa9;
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .booking-form {
+
+            padding: 10px;
+        }
+
+
+        .booking-form h2 {
+
+            font-size: 28px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .form-group {
+
+            margin-bottom: 20px;
+        }
+
+
+        label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 18px;
+        }
+
+
+        input,
+        select {
+
+            width: 100%;
+
+            padding: 12px;
+
+            background: #21140f;
+
+            border: 1px solid #705242;
+
+            color: #f1e8dc;
+
+            font-family: "Times New Roman", serif;
+
+            font-size: 16px;
+
+            outline: none;
+        }
+
+
+        input:focus,
+        select:focus {
+
+            border-color: #c9ad95;
+        }
+
+
+        select option {
+
+            background: #21140f;
+
+            color: #f1e8dc;
+        }
+
+
+        /* =========================
+           DRIVER SECTION
+        ========================= */
+
+        .driver-question {
+
+            margin-top: 10px;
+
+            margin-bottom: 20px;
+
+            padding: 15px;
+
+            background: #241610;
+
+            border: 1px solid #5b4032;
+        }
+
+
+        .driver-question label {
+
+            font-size: 18px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .radio-group {
+
+            display: flex;
+
+            gap: 30px;
+
+            align-items: center;
+        }
+
+
+        .radio-option {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            cursor: pointer;
+        }
+
+
+        .radio-option input {
+
+            width: auto;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           DRIVER SELECTION
+        ========================= */
+
+        #driverSection {
+
+            display: none;
+
+            margin-bottom: 20px;
+
+            padding: 18px;
+
+            background: #241610;
+
+            border: 1px solid #5b4032;
+        }
+
+
+        #driverSection h3 {
+
+            font-size: 21px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .driver-info {
+
+            margin-top: 15px;
+
+            padding: 12px;
+
+            background: #21140f;
+
+            border: 1px solid #5b4032;
+
+            display: none;
+        }
+
+
+        .driver-info p {
+
+            margin: 7px 0;
+
+            color: #d8bfa9;
+
+            font-size: 15px;
+        }
+
+
+        .driver-info strong {
+
+            color: #f1e8dc;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .book-btn {
+
+            width: 100%;
+
+            padding: 14px;
+
+            background: #f1e8dc;
+
+            color: #2b1a14;
+
+            border: none;
+
+            font-family: "Times New Roman", serif;
+
+            font-size: 19px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 10px;
+        }
+
+
+        .book-btn:hover {
+
+            background: #d8c5b3;
+        }
+
+
+        .book-btn:disabled {
+
+            background: #806f61;
+
+            color: #cfc2b8;
+
+            cursor: not-allowed;
+        }
+
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        .message {
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            font-size: 17px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            nav {
+
+                padding: 0 20px;
+            }
+
+
+            .nav-links {
+
+                gap: 12px;
+            }
+
+
+            .nav-links a {
+
+                font-size: 14px;
+            }
+
+
+            .booking-box {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .heading h1 {
+
+                font-size: 32px;
+            }
+
+
+            .radio-group {
+
+                gap: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav>
+
+        <div class="logo">
+            🚗 RideSphere
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="Home.html">
+                Home
+            </a>
+
+            <a href="vehicles.html">
+                Vehicles
+            </a>
+
+            <a href="mybooking.html">
+                My Bookings
+            </a>
+
+            <a href="#" onclick="logout()">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         PAGE
+    ========================= -->
+
+    <div class="container">
+
+
+        <div class="heading">
+
+            <h1>
+                Book Your Vehicle
+            </h1>
+
+            <p>
+                Choose your dates and reserve your ride.
+            </p>
+
+        </div>
+
+
+
+        <div class="booking-box">
+
+
+            <!-- =========================
+                 VEHICLE DETAILS
+            ========================= -->
+
+            <div class="vehicle-details">
+
+                <h2>
+                    Vehicle Details
+                </h2>
+
+
+                <p>
+
+                    <strong>
+                        Vehicle:
+                    </strong>
+
+                    <span id="vehicleName">
+                        Loading...
+                    </span>
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Model:
+                    </strong>
+
+                    <span id="vehicleModel">
+                        Loading...
+                    </span>
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Type:
+                    </strong>
+
+                    <span id="vehicleType">
+                        Loading...
+                    </span>
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Daily Fee:
+                    </strong>
+
+                    ₹<span id="dailyFee">
+                        0
+                    </span>
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 BOOKING FORM
+            ========================= -->
+
+            <div class="booking-form">
+
+                <h2>
+                    Booking Details
+                </h2>
+
+
+                <form id="bookingForm">
+
+
+                    <!-- START DATE -->
+
+                    <div class="form-group">
+
+                        <label for="startDate">
+                            Start Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="startDate"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- END DATE -->
+
+                    <div class="form-group">
+
+                        <label for="endDate">
+                            End Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="endDate"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- =========================
+                         DRIVER QUESTION
+                    ========================= -->
+
+                    <div class="driver-question">
+
+                        <label>
+                            Do you need a driver?
+                        </label>
+
+
+                        <div class="radio-group">
+
+
+                            <label class="radio-option">
+
+                                <input
+                                    type="radio"
+                                    name="driverRequired"
+                                    value="false"
+                                    checked
+                                    onchange="driverChoiceChanged()"
+                                >
+
+                                No
+
+                            </label>
+
+
+                            <label class="radio-option">
+
+                                <input
+                                    type="radio"
+                                    name="driverRequired"
+                                    value="true"
+                                    onchange="driverChoiceChanged()"
+                                >
+
+                                Yes
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =========================
+                         DRIVER SECTION
+                    ========================= -->
+
+                    <div id="driverSection">
+
+                        <h3>
+                            Select Driver
+                        </h3>
+
+
+                        <div class="form-group">
+
+                            <label for="driverId">
+                                Available Driver
+                            </label>
+
+
+                            <select id="driverId">
+
+                                <option value="">
+                                    Loading drivers...
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- DRIVER DETAILS -->
+
+                        <div
+                            class="driver-info"
+                            id="driverInfo"
+                        >
+
+                            <p>
+
+                                <strong>
+                                    Name:
+                                </strong>
+
+                                <span id="driverName">
+                                </span>
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    Email:
+                                </strong>
+
+                                <span id="driverEmail">
+                                </span>
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    License:
+                                </strong>
+
+                                <span id="driverLicense">
+                                </span>
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    Specialization:
+                                </strong>
+
+                                <span id="driverSpecialization">
+                                </span>
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =========================
+                         SUBMIT
+                    ========================= -->
+
+                    <button
+                        type="submit"
+                        class="book-btn"
+                        id="bookButton"
+                    >
+                        Confirm Booking
+                    </button>
+
+
+                </form>
+
+
+                <div
+                    class="message"
+                    id="message"
+                >
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        /* ==========================================
+           SERVICE URLs
+        ========================================== */
+
+        const VEHICLE_SERVICE_URL =
+            "http://localhost:8082/vehicles";
+
+
+        const BOOKING_SERVICE_URL =
+            "http://localhost:8084/bookings";
+
+
+        /*
+         * IMPORTANT:
+         *
+         * Replace 808X with the actual port
+         * of your Driver Service.
+         *
+         * Example:
+         *
+         * http://localhost:8083/drivers
+         */
+
+        const DRIVER_SERVICE_URL =
+            "http://localhost:8083/drivers";
+
+
+
+        /* ==========================================
+           CHECK CUSTOMER LOGIN
+        ========================================== */
+
+        const customerData =
+            localStorage.getItem("customer");
+
+
+        if (!customerData) {
+
+            alert("Please login first.");
+
+            window.location.href =
+                "login.html";
+        }
+
+
+        const customer =
+            JSON.parse(customerData);
+
+
+
+        /* ==========================================
+           GET SELECTED VEHICLE
+        ========================================== */
+
+        const vehicleId =
+            localStorage.getItem("selectedVehicleId");
+
+
+        if (!vehicleId) {
+
+            alert("Please select a vehicle first.");
+
+            window.location.href =
+                "vehicles.html";
+        }
+
+
+
+        /* ==========================================
+           LOAD VEHICLE
+        ========================================== */
+
+        async function loadVehicle() {
+
+            try {
+
+                const response =
+                    await fetch(
+                        VEHICLE_SERVICE_URL +
+                        "/" +
+                        vehicleId
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Vehicle not found"
+                    );
+                }
+
+
+                const vehicle =
+                    await response.json();
+
+
+                document.getElementById(
+                    "vehicleName"
+                ).textContent =
+                    vehicle.vehiclename;
+
+
+                document.getElementById(
+                    "vehicleModel"
+                ).textContent =
+                    vehicle.model;
+
+
+                document.getElementById(
+                    "vehicleType"
+                ).textContent =
+                    vehicle.type;
+
+
+                document.getElementById(
+                    "dailyFee"
+                ).textContent =
+                    vehicle.dailyfee;
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Vehicle Error:",
+                    error
+                );
+
+
+                document.getElementById(
+                    "message"
+                ).textContent =
+                    "Unable to load vehicle details.";
+
+            }
+
+        }
+
+
+        loadVehicle();
+
+
+
+        /* ==========================================
+           DRIVER RADIO BUTTON
+        ========================================== */
+
+        function driverChoiceChanged() {
+
+            const driverRequired =
+                document.querySelector(
+                    'input[name="driverRequired"]:checked'
+                ).value === "true";
+
+
+            const driverSection =
+                document.getElementById(
+                    "driverSection"
+                );
+
+
+            if (driverRequired) {
+
+                driverSection.style.display =
+                    "block";
+
+
+                loadDrivers();
+
+            }
+
+            else {
+
+                driverSection.style.display =
+                    "none";
+
+
+                document.getElementById(
+                    "driverId"
+                ).value = "";
+
+
+                document.getElementById(
+                    "driverInfo"
+                ).style.display =
+                    "none";
+
+            }
+
+        }
+
+
+
+        /* ==========================================
+           LOAD DRIVERS
+        ========================================== */
+
+        async function loadDrivers() {
+
+            const driverSelect =
+                document.getElementById(
+                    "driverId"
+                );
+
+
+            driverSelect.innerHTML = `
+
+                <option value="">
+                    Loading drivers...
+                </option>
+
+            `;
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        DRIVER_SERVICE_URL
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Unable to load drivers"
+                    );
+                }
+
+
+                const drivers =
+                    await response.json();
+
+
+                driverSelect.innerHTML = `
+
+                    <option value="">
+                        -- Select Driver --
+                    </option>
+
+                `;
+
+
+                if (drivers.length === 0) {
+
+                    driverSelect.innerHTML = `
+
+                        <option value="">
+                            No drivers available
+                        </option>
+
+                    `;
+
+                    return;
+                }
+
+
+                drivers.forEach(driver => {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+
+                    option.value =
+                        driver.id;
+
+
+                    option.textContent =
+                        driver.name +
+                        " - " +
+                        driver.specialization;
+
+
+                    option.dataset.name =
+                        driver.name;
+
+
+                    option.dataset.email =
+                        driver.email;
+
+
+                    option.dataset.license =
+                        driver.licenseNumber;
+
+
+                    option.dataset.specialization =
+                        driver.specialization;
+
+
+                    driverSelect.appendChild(
+                        option
+                    );
+
+                });
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Driver Error:",
+                    error
+                );
+
+
+                driverSelect.innerHTML = `
+
+                    <option value="">
+                        Unable to load drivers
+                    </option>
+
+                `;
+
+            }
+
+        }
+
+
+
+        /* ==========================================
+           SHOW SELECTED DRIVER DETAILS
+        ========================================== */
+
+        document
+            .getElementById("driverId")
+            .addEventListener(
+                "change",
+                function() {
+
+                    const selectedOption =
+                        this.options[
+                            this.selectedIndex
+                        ];
+
+
+                    const driverInfo =
+                        document.getElementById(
+                            "driverInfo"
+                        );
+
+
+                    if (!this.value) {
+
+                        driverInfo.style.display =
+                            "none";
+
+                        return;
+                    }
+
+
+                    document.getElementById(
+                        "driverName"
+                    ).textContent =
+                        selectedOption.dataset.name;
+
+
+                    document.getElementById(
+                        "driverEmail"
+                    ).textContent =
+                        selectedOption.dataset.email;
+
+
+                    document.getElementById(
+                        "driverLicense"
+                    ).textContent =
+                        selectedOption.dataset.license;
+
+
+                    document.getElementById(
+                        "driverSpecialization"
+                    ).textContent =
+                        selectedOption.dataset.specialization;
+
+
+                    driverInfo.style.display =
+                        "block";
+
+                }
+            );
+
+
+
+        /* ==========================================
+           BOOKING FORM
+        ========================================== */
+
+        document
+            .getElementById("bookingForm")
+            .addEventListener(
+                "submit",
+                async function(event) {
+
+                    event.preventDefault();
+
+
+                    const startDate =
+                        document.getElementById(
+                            "startDate"
+                        ).value;
+
+
+                    const endDate =
+                        document.getElementById(
+                            "endDate"
+                        ).value;
+
+
+
+                    /* =========================
+                       CHECK DATES
+                    ========================= */
+
+                    if (endDate < startDate) {
+
+                        alert(
+                            "End date must be after start date."
+                        );
+
+                        return;
+                    }
+
+
+
+                    /* =========================
+                       CALCULATE DURATION
+                    ========================= */
+
+                    const start =
+                        new Date(startDate);
+
+
+                    const end =
+                        new Date(endDate);
+
+
+                    const difference =
+                        end - start;
+
+
+                    const durationdays =
+                        Math.ceil(
+                            difference /
+                            (1000 * 60 * 60 * 24)
+                        );
+
+
+                    if (durationdays <= 0) {
+
+                        alert(
+                            "Please select valid dates."
+                        );
+
+                        return;
+                    }
+
+
+
+                    /* =========================
+                       DRIVER INFORMATION
+                    ========================= */
+
+                    const driverRequired =
+                        document.querySelector(
+                            'input[name="driverRequired"]:checked'
+                        ).value === "true";
+
+
+                    let driverId = null;
+
+
+                    if (driverRequired) {
+
+                        const selectedDriver =
+                            document.getElementById(
+                                "driverId"
+                            ).value;
+
+
+                        if (!selectedDriver) {
+
+                            alert(
+                                "Please select a driver."
+                            );
+
+                            return;
+                        }
+
+
+                        driverId =
+                            Number(selectedDriver);
+
+                    }
+
+
+
+                    /* =========================
+                       CREATE BOOKING
+                    ========================= */
+
+                    const booking = {
+
+                        customerId:
+                            Number(customer.id),
+
+                        vehicleId:
+                            Number(vehicleId),
+
+                        date:
+                            startDate,
+
+                        durationdays:
+                            durationdays,
+
+                        status:
+                            "CONFIRMED",
+
+                        driverId:
+                            driverId,
+
+                        driverRequired:
+                            driverRequired
+
+                    };
+
+
+                    console.log(
+                        "Booking being sent:",
+                        booking
+                    );
+
+
+
+                    /* =========================
+                       SEND TO BOOKING SERVICE
+                    ========================= */
+
+                    const bookButton =
+                        document.getElementById(
+                            "bookButton"
+                        );
+
+
+                    bookButton.disabled =
+                        true;
+
+
+                    bookButton.textContent =
+                        "Booking...";
+
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                BOOKING_SERVICE_URL,
+                                {
+                                    method: "POST",
+
+                                    headers: {
+                                        "Content-Type":
+                                            "application/json"
+                                    },
+
+                                    body:
+                                        JSON.stringify(
+                                            booking
+                                        )
+                                }
+                            );
+
+
+                        const result =
+                            await response.text();
+
+
+                        console.log(
+                            "Booking response:",
+                            result
+                        );
+
+
+
+                        /* =========================
+                           CHECK RESULT
+                        ========================= */
+
+                        if (
+
+                            response.ok &&
+
+                            result ===
+                            "Booking Successful"
+
+                        ) {
+
+                            alert(
+                                "Booking successful!"
+                            );
+
+
+                            localStorage.removeItem(
+                                "selectedVehicleId"
+                            );
+
+
+                            window.location.href =
+                                "mybooking.html";
+
+                        }
+
+                        else {
+
+                            document.getElementById(
+                                "message"
+                            ).textContent =
+                                result ||
+                                "Booking failed.";
+
+
+                            bookButton.disabled =
+                                false;
+
+
+                            bookButton.textContent =
+                                "Confirm Booking";
+
+                        }
+
+                    }
+
+                    catch (error) {
+
+                        console.error(
+                            "Booking Error:",
+                            error
+                        );
+
+
+                        document.getElementById(
+                            "message"
+                        ).textContent =
+                            "Unable to connect to Booking Service.";
+
+
+                        bookButton.disabled =
+                            false;
+
+
+                        bookButton.textContent =
+                            "Confirm Booking";
+
+                    }
+
+                }
+            );
+
+
+
+        /* ==========================================
+           LOGOUT
+        ========================================== */
+
+        function logout() {
+
+            localStorage.removeItem(
+                "customer"
+            );
+
+
+            localStorage.removeItem(
+                "selectedVehicleId"
+            );
+
+
+            window.location.href =
+                "index.html";
+        }
+
+    </script>
+
+</body>
+
+</html>
+```

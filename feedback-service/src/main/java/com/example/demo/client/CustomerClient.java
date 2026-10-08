@@ -1,0 +1,15 @@
+package com.example.demo.client;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.example.demo.dto.CustomerDto;
+
+@FeignClient(name="customer-service")
+public interface CustomerClient {
+
+	@GetMapping("/customers/{id}")
+	public ResponseEntity<CustomerDto> findById(@PathVariable("id") int id);
+}
